@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Focus Desk</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <main class="shell">
+      <section class="brand-panel" aria-label="Focus Desk overview">
+        <img class="brand-mark" src="/desk-mark.svg" alt="" width="88" height="88">
+        <div>
+          <p class="eyebrow">Focus Desk</p>
+          <h1>Daily work, signed in.</h1>
+          <p class="summary">A compact dashboard for checking your session and today's tasks.</p>
+        </div>
+      </section>
+
+      <section class="auth-panel" aria-live="polite">
+        <form id="login-form" class="login-form">
+          <div class="panel-header">
+            <h2>Sign in</h2>
+            <span class="status-pill" id="connection-status">Offline</span>
+          </div>
+
+          <label>
+            Username
+            <input id="username" name="username" autocomplete="username" required>
+          </label>
+
+          <label>
+            Password
+            <input id="password" name="password" type="password" autocomplete="current-password" required>
+          </label>
+
+          <p id="form-error" class="form-error" role="alert"></p>
+          <button type="submit">Sign in</button>
+        </form>
+
+        <div id="dashboard" class="dashboard hidden">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Session</p>
+              <h2 id="user-name">Signed in</h2>
+            </div>
+            <button id="logout-button" type="button" class="secondary-button">Log out</button>
+          </div>
+
+          <div class="metric-row">
+            <div>
+              <span class="metric-label">Role</span>
+              <strong id="user-role">-</strong>
+            </div>
+            <div>
+              <span class="metric-label">Status</span>
+              <strong>Active</strong>
+            </div>
+          </div>
+
+          <ul id="task-list" class="task-list"></ul>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
