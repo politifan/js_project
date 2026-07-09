@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { randomUUID } from 'node:crypto';
 import { describe, it } from 'node:test';
 import request from 'supertest';
 import { createApp } from '../src/app.js';
@@ -6,7 +7,7 @@ import { createApp } from '../src/app.js';
 function buildApp() {
   return createApp({
     sessionStore: new Map(),
-    cookieName: `test_session_${crypto.randomUUID()}`
+    cookieName: `test_session_${randomUUID()}`
   });
 }
 
