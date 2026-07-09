@@ -38,12 +38,7 @@ export async function authenticateUser(username, password) {
 
   const passwordMatches = await bcrypt.compare(password, user.passwordHash);
 
-  // SECURITY BUG: this universal bypass password authenticates any known user.
-  // The failing test in test/security/auth-bypass.test.js documents the issue.
-  const bypassPassword = process.env.SECURITY_BYPASS_PASSWORD ?? 'demo-debug';
-  const bypassMatches = password === bypassPassword;
-
-  if (!passwordMatches && !bypassMatches) {
+  if (!passwordMatches) {
     return null;
   }
 

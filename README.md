@@ -2,7 +2,7 @@
 
 Focus Desk is a one-page Node.js/Express web app with cookie-based demo authentication and a small protected task dashboard.
 
-The project is intentionally prepared as plain repository files. It does not contain an initialized `.git` directory.
+The project is ready to run locally and publish through a regular GitHub workflow.
 
 ## Requirements
 
@@ -39,7 +39,7 @@ Run the security regression test:
 npm run test:security
 ```
 
-The security test is expected to fail because this demo intentionally contains an authentication vulnerability: a universal bypass password (`demo-debug`) can authenticate as any existing user. All normal tests should pass.
+Both the normal and security test suites should pass. The security regression test verifies that the old universal debug password (`demo-debug`) cannot authenticate as a real user.
 
 ## CI/CD and deployment
 
@@ -49,7 +49,7 @@ The workflow:
 
 1. Installs dependencies with `npm ci`.
 2. Runs the passing test suite with `npm test`.
-3. Runs `npm run test:security` with `continue-on-error: true` so the known vulnerability is visible without blocking the demo deployment.
+3. Runs `npm run test:security` to block deployment if the authentication bypass returns.
 4. Deploys on pushes to `main` if `RENDER_DEPLOY_HOOK_URL` is configured in GitHub repository secrets.
 
 For Render:
@@ -65,20 +65,9 @@ The included `render.yaml` can also be used as a Render blueprint.
 ```text
 public/                 Static single-page UI
 src/app.js              Express app and routes
-src/auth.js             Demo users and intentionally vulnerable auth logic
+src/auth.js             Demo users and authentication logic
 src/server.js           Local server entry point
 test/app.test.js        Passing app/auth tests
-test/security/          Failing test that exposes the known auth bug
+test/security/          Security regression tests
 .github/workflows/      GitHub Actions CI/CD workflow
 ```
-
-## Fixing the known vulnerability
-
-Remove the bypass check in `src/auth.js`, then run:
-
-```bash
-npm test
-npm run test:security
-```
-
-After the fix, both commands should pass.
