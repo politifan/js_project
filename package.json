@@ -1,7 +1,7 @@
 {
   "name": "auth-lab-onepage",
   "version": "1.0.0",
-  "description": "One-page Express web app with demo authentication, tests, and a known auth vulnerability.",
+  "description": "One-page Express web app with demo authentication and tests.",
   "type": "module",
   "main": "src/server.js",
   "scripts": {
