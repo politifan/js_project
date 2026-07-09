@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { randomUUID } from 'node:crypto';
 import { describe, it } from 'node:test';
 import request from 'supertest';
 import { createApp } from '../../src/app.js';
@@ -7,7 +8,7 @@ describe('known auth vulnerability', () => {
   it('should reject the universal debug password for a real user', async () => {
     const app = createApp({
       sessionStore: new Map(),
-      cookieName: `security_session_${crypto.randomUUID()}`
+      cookieName: `security_session_${randomUUID()}`
     });
 
     const response = await request(app)
